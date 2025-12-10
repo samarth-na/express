@@ -16,6 +16,7 @@ router.post("/", function (req, res) {
     console.log(todos);
 
     todos.push(todo);
-    res.status(201).send(`recived request with data: ${todo}`); // return the added todo
+    const one = 1;
+    res.status(201).send(`recived request with data: ${todo.task} `);
 });
 module.exports = router;
