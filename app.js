@@ -11,11 +11,12 @@ var todoRouter = require("./routes/todo");
 
 var app = express();
 
-app.use(logger("dev")); // Log every request in the console (method, path, time)
+app.use(logger("dev")); // Logs method, path, time
 
-app.use(express.json()); // Allow the server to read JSON sent by clients
+app.use(express.json());
 
-app.use(express.urlencoded({ extended: false })); // Allow the server to read form data (POST with urlencoded bodies)
+app.use(express.urlencoded({ extended: false }));
+// Allow the server to read form data (POST with urlencoded bodies)
 
 app.use(cookieParser()); // Parse cookies in incoming requests
 
