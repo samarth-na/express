@@ -3,6 +3,12 @@ const cookieParser = require("cookie-parser");
 
 const app = express();
 
+async function externallyValidateCookie(value) {
+    if (value !== "secret123") {
+        throw new Error("bad cookie");
+    }
+}
+
 async function cookieValidator(cookies) {
     try {
         await externallyValidateCookie(cookies.testCookie);
