@@ -22,26 +22,28 @@ router.post("/signup", async (req, res) => {
 		return res.status(400).json({ error: "Email and password required" });
 	}
 
-	const existingUser = db
+	const existingUserQuery = db
 		.prepare("SELECT id FROM users WHERE email = ?")
 		.get(email);
 
-	if (existingUser) {
+	if (existingUserQuery) {
 		return res.status(409).json({ error: "User already exists" });
 	}
 
 	const saltRounds = 10;
 	const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-	const stmt = db.prepare("INSERT INTO users (email, password) VALUES (?, ?)");
-	const info = stmt.run(email, hashedPassword);
+	const newUserQuery = db.prepare(
+		"INSERT INTO users (email, password) VALUES (?, ?)",
+	);
+	const info = newUserQuery.run(email, hashedPassword);
 
 	const token = jwt.sign({ id: info.lastInsertRowid, email }, JWT_SECRET, {
-		expiresIn: "1h",
+		expiresIn: "24h",
 	});
 
 	res.status(201).json({
-		message: "User created successfully",
+		message: "User created successfully and logged in",
 		user: { id: info.lastInsertRowid, email },
 		token,
 	});
