@@ -8,6 +8,7 @@ var logger = require("morgan");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var todoRouter = require("./routes/todo");
+var playground = require("./routes/playground");
 
 var app = express();
 
@@ -28,5 +29,6 @@ app.use("/files", express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter); // handles routes like GET /
 app.use("/users", usersRouter); // handles routes like GET /users
 app.use("/todo", todoRouter); // handles routes like GET /todo
+app.use("/playground", playground); // HTTP method demos under /playground
 
 module.exports = app;
