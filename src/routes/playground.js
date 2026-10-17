@@ -31,7 +31,8 @@ function describe(req) {
 
 /* GET /playground -> list the items */
 router.get("/", (_req, res) => {
-    res.send(items);
+    console.log(_req);
+    res.send();
 });
 
 /* GET /playground/methods -> index of every demo route */
@@ -55,8 +56,8 @@ router.get("/methods", (_req, res) => {
  * first and router.head() after, the GET route would swallow HEAD requests and
  * your head handler would never run.
  */
-router.route("/items/:id")
-    /* GET -> read one item. :id is a route parameter, read from req.params. */
+router
+    .route("/items/:id")
     .get((req, res) => {
         var item = items[req.params.id];
         if (!item) {

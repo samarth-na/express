@@ -1,6 +1,6 @@
 // Load core packages
 var express = require("express");
-var path = require("path");
+var path = require("node:path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
@@ -9,6 +9,7 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var todoRouter = require("./routes/todo");
 var playground = require("./routes/playground");
+var testRouter = require("./routes/test");
 
 var app = express();
 
@@ -30,5 +31,6 @@ app.use("/", indexRouter); // handles routes like GET /
 app.use("/users", usersRouter); // handles routes like GET /users
 app.use("/todo", todoRouter); // handles routes like GET /todo
 app.use("/playground", playground); // HTTP method demos under /playground
+app.use("/test", testRouter); // URL API demo under /test
 
 module.exports = app;
